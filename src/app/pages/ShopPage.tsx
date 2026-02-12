@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar } from "@/app/components/Navbar";
+// import { Navbar } from "@/app/components/Navbar";
 import { FilterBar } from "@/app/components/shop/FilterBar";
 import { MapView } from "@/app/components/shop/MapView";
 import { ProductCard } from "@/app/components/shop/ProductCard";
@@ -204,22 +204,20 @@ export function ShopPage() {
           <div className="flex relative z-0 gap-2">
             <button
               onClick={() => setShowMap(false)}
-              className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${
-                !showMap
+              className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${!showMap
                   ? "bg-[#16A34A] text-white"
                   : "bg-[#F9FAFB] text-[#374151]"
-              }`}
+                }`}
             >
               <Grid3x3 className="w-4 h-4" />
               List View
             </button>
             <button
               onClick={() => setShowMap(true)}
-              className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${
-                showMap
+              className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${showMap
                   ? "bg-[#16A34A] text-white"
                   : "bg-[#F9FAFB] text-[#374151]"
-              }`}
+                }`}
             >
               <Map className="w-4 h-4" />
               Map View
@@ -233,9 +231,8 @@ export function ShopPage() {
             <div className="h-full flex flex-col relative z-0 pt-8 lg:flex-row">
               {/* Map View - Desktop: Left 50% | Mobile: Full or Hidden */}
               <div
-                className={`${
-                  showMap ? "flex" : "hidden lg:flex"
-                } lg:w-1/2 h-full`}
+                className={`${showMap ? "flex" : "hidden lg:flex"
+                  } lg:w-1/2 h-full`}
               >
                 <div className="w-full h-full p-4 relative z-0">
                   <MapView
@@ -255,9 +252,8 @@ export function ShopPage() {
 
               {/* Product List - Desktop: Right 50% | Mobile: Full or Hidden */}
               <div
-                className={`${
-                  !showMap ? "flex" : "hidden lg:flex"
-                } lg:w-1/2 h-full bg-white`}
+                className={`${!showMap ? "flex" : "hidden lg:flex"
+                  } lg:w-1/2 h-full bg-white`}
               >
                 <div className="w-full h-full overflow-y-auto">
                   <div className="p-4 space-y-4 z-50 relative">
