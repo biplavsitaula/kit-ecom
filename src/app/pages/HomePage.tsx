@@ -34,12 +34,9 @@ export function HomePage() {
   return (
     <div className="bg-white">
       
-      {/* ✅ Full Screen Map Section */}
       <section className="w-full h-150 my-10">
         <MapView locations={locations} />
       </section>
-
-      {/* ✅ Other Sections Below */}
       <CategoriesSection />
       <FeaturedProducts />
       <DealsSection />
