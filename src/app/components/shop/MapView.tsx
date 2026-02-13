@@ -9,7 +9,7 @@ type Location = {
   avgPrice: number;
 };
 
-type MapViewProps = {
+export type MapViewProps = {
   locations: Location[];
 };
 
