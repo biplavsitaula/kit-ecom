@@ -15,12 +15,31 @@ export type MapViewProps = {
 
 export function MapView({ locations }: MapViewProps) {
   return (
-    <div className="mx-8 border rounded-lg h-150">
+    <div
+      style={{
+        margin: "0 clamp(8px, 3vw, 32px)",
+        border: "1px solid #e2e8f0",
+        borderRadius: "12px",
+        overflow: "hidden",
+        height: "clamp(280px, 50vh, 600px)",
+        minHeight: "280px",
+        width: "auto",
+        position: "relative",
+        zIndex: 0,          // ✅ Key fix: contain Leaflet's z-index within this stacking context
+        isolation: "isolate", // ✅ Creates a new stacking context so map can't escape
+      }}
+    >
       <MapContainer
         center={[40.7589, -73.9851]}
         zoom={12}
-        scrollWheelZoom={false}   // ✅ Disable zoom on scroll
-        className="w-full h-150"
+        scrollWheelZoom={false}
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
       >
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
@@ -30,10 +49,16 @@ export function MapView({ locations }: MapViewProps) {
         {locations.map((location) => (
           <Marker key={location.id} position={location.position}>
             <Popup>
-              <div>
-                <h3 className="font-bold">{location.vendorName}</h3>
-                <p>Products: {location.productCount}</p>
-                <p>Avg Price: ${location.avgPrice}</p>
+              <div style={{ minWidth: "140px" }}>
+                <h3 style={{ fontWeight: "700", marginBottom: "4px", fontSize: "14px" }}>
+                  {location.vendorName}
+                </h3>
+                <p style={{ margin: "2px 0", fontSize: "13px", color: "#555" }}>
+                  Products: {location.productCount}
+                </p>
+                <p style={{ margin: "2px 0", fontSize: "13px", color: "#555" }}>
+                  Avg Price: ${location.avgPrice}
+                </p>
               </div>
             </Popup>
           </Marker>

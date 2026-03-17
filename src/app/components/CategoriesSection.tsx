@@ -2,84 +2,154 @@ import { Shirt, Laptop, Home, Watch, Headphones, ShoppingBag } from 'lucide-reac
 
 export function CategoriesSection() {
   const categories = [
-    {
-      name: 'Fashion',
-      icon: Shirt,
-      count: '2,340 items',
-      color: 'bg-blue-50',
-      iconColor: 'text-blue-600',
-    },
-    {
-      name: 'Electronics',
-      icon: Laptop,
-      count: '1,856 items',
-      color: 'bg-purple-50',
-      iconColor: 'text-purple-600',
-    },
-    {
-      name: 'Home & Living',
-      icon: Home,
-      count: '3,124 items',
-      color: 'bg-green-50',
-      iconColor: 'text-green-600',
-    },
-    {
-      name: 'Accessories',
-      icon: Watch,
-      count: '987 items',
-      color: 'bg-amber-50',
-      iconColor: 'text-amber-600',
-    },
-    {
-      name: 'Audio',
-      icon: Headphones,
-      count: '645 items',
-      color: 'bg-red-50',
-      iconColor: 'text-red-600',
-    },
-    {
-      name: 'Bags',
-      icon: ShoppingBag,
-      count: '1,234 items',
-      color: 'bg-indigo-50',
-      iconColor: 'text-indigo-600',
-    },
+    { name: 'Fashion', icon: Shirt, count: '2,340', color: '#3B82F6', bg: '#EFF6FF' },
+    { name: 'Electronics', icon: Laptop, count: '1,856', color: '#8B5CF6', bg: '#F5F3FF' },
+    { name: 'Home & Living', icon: Home, count: '3,124', color: '#10B981', bg: '#ECFDF5' },
+    { name: 'Accessories', icon: Watch, count: '987', color: '#F59E0B', bg: '#FFFBEB' },
+    { name: 'Audio', icon: Headphones, count: '645', color: '#EF4444', bg: '#FEF2F2' },
+    { name: 'Bags', icon: ShoppingBag, count: '1,234', color: '#6366F1', bg: '#EEF2FF' },
   ];
 
   return (
-    <section id="categories" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#111827] mb-4">
-            Shop by Category
-          </h2>
-          <p className="text-[#6B7280] max-w-2xl mx-auto">
-            Browse through our wide range of categories and find exactly what you're looking for
-          </p>
+    <section
+      id="categories"
+      style={{
+        background: '#FAFAFA',
+        padding: 'clamp(20px, 4vw, 40px) 0',
+        borderTop: '1px solid #F0F0F0',
+      }}
+    >
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(12px, 3vw, 32px)' }}>
+
+        {/* Compact header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: 'clamp(14px, 2.5vw, 24px)' }}>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, #E5E7EB)' }} />
+          <div style={{ textAlign: 'center' }}>
+            <h2 style={{
+              fontSize: 'clamp(15px, 2.2vw, 20px)',
+              fontWeight: '700',
+              color: '#111827',
+              letterSpacing: '-0.02em',
+              margin: 0,
+              whiteSpace: 'nowrap',
+            }}>
+              Shop by Category
+            </h2>
+          </div>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, transparent, #E5E7EB)' }} />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-          {categories.map((category, index) => {
-            const Icon = category.icon;
+        {/* Category grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 'clamp(8px, 1.5vw, 14px)',
+        }}
+          className="categories-grid"
+        >
+          {categories.map((cat, i) => {
+            const Icon = cat.icon;
             return (
               <div
-                key={index}
-                className="group cursor-pointer"
+                key={i}
+                className="category-card"
+                style={{
+                  background: '#fff',
+                  border: '1px solid #EBEBEB',
+                  borderRadius: '14px',
+                  padding: 'clamp(10px, 2vw, 18px) clamp(6px, 1vw, 12px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  textDecoration: 'none',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget;
+                  el.style.transform = 'translateY(-3px)';
+                  el.style.boxShadow = `0 8px 24px ${cat.color}22`;
+                  el.style.borderColor = `${cat.color}44`;
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget;
+                  el.style.transform = 'translateY(0)';
+                  el.style.boxShadow = 'none';
+                  el.style.borderColor = '#EBEBEB';
+                }}
               >
-                <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 text-center transition-all hover:shadow-lg hover:scale-105 hover:-translate-y-1">
-                  <div className={`${category.color} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform group-hover:scale-110`}>
-                    <Icon className={`w-8 h-8 ${category.iconColor}`} />
-                  </div>
-                  <h3 className="font-semibold text-[#111827] mb-1">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-[#6B7280]">{category.count}</p>
+                {/* Icon circle */}
+                <div style={{
+                  width: 'clamp(40px, 5vw, 52px)',
+                  height: 'clamp(40px, 5vw, 52px)',
+                  borderRadius: '50%',
+                  background: cat.bg,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <Icon style={{ width: 'clamp(18px, 2.2vw, 24px)', height: 'clamp(18px, 2.2vw, 24px)', color: cat.color }} />
                 </div>
+
+                {/* Text */}
+                <div style={{ textAlign: 'center', lineHeight: 1.3 }}>
+                  <div style={{
+                    fontWeight: '600',
+                    fontSize: 'clamp(11px, 1.1vw, 13px)',
+                    color: '#111827',
+                    marginBottom: '2px',
+                  }}>
+                    {cat.name}
+                  </div>
+                  <div style={{
+                    fontSize: 'clamp(9px, 0.9vw, 11px)',
+                    color: '#9CA3AF',
+                    fontWeight: '500',
+                  }}>
+                    {cat.count} items
+                  </div>
+                </div>
+
+                {/* Bottom accent bar on hover */}
+                <div
+                  className="accent-bar"
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: cat.color,
+                    transform: 'scaleX(0)',
+                    transition: 'transform 0.2s ease',
+                    transformOrigin: 'center',
+                  }}
+                />
               </div>
             );
           })}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .categories-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+        @media (max-width: 380px) {
+          .categories-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        .category-card:hover .accent-bar {
+          transform: scaleX(1) !important;
+        }
+      `}</style>
     </section>
   );
 }

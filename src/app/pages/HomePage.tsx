@@ -5,6 +5,7 @@ import { ValueProposition } from '@/app/components/ValueProposition';
 import { Testimonials } from '@/app/components/Testimonials';
 import { Newsletter } from '@/app/components/Newsletter';
 import { MapView } from '../components/shop/MapView';
+import { MapStatsBar } from '../components/MapStatsBar';
 
 export function HomePage() {
   const locations = [
@@ -33,17 +34,23 @@ export function HomePage() {
 
   return (
     <div className="bg-white">
-      
-      <section className="w-full h-150 my-10">
+
+      {/* <section className="w-full h-150 my-10">
         <MapView locations={locations} />
-      </section>
+      </section> */}
+      <div className='w-full my-4'>
+         <MapView locations={locations} />
+        </div>
+     
+
+      {/* <MapStatsBar /> */}
       <CategoriesSection />
       <FeaturedProducts />
       <DealsSection />
       <ValueProposition />
       <Testimonials />
       <Newsletter />
-      
+
     </div>
   );
 }
