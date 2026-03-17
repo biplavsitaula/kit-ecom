@@ -9,6 +9,13 @@ type Location = {
   avgPrice: number;
 };
 
+const customIcon: any = new L.Icon({
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
 export type MapViewProps = {
   locations: Location[];
 };
@@ -25,8 +32,8 @@ export function MapView({ locations }: MapViewProps) {
         minHeight: "280px",
         width: "auto",
         position: "relative",
-        zIndex: 0,          // ✅ Key fix: contain Leaflet's z-index within this stacking context
-        isolation: "isolate", // ✅ Creates a new stacking context so map can't escape
+        zIndex: 0,
+        isolation: "isolate",
       }}
     >
       <MapContainer
@@ -42,15 +49,25 @@ export function MapView({ locations }: MapViewProps) {
         }}
       >
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
+          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         {locations.map((location) => (
-          <Marker key={location.id} position={location.position}>
+          <Marker
+            key={location.id}
+            position={location.position}
+            icon={customIcon}
+          >
             <Popup>
               <div style={{ minWidth: "140px" }}>
-                <h3 style={{ fontWeight: "700", marginBottom: "4px", fontSize: "14px" }}>
+                <h3
+                  style={{
+                    fontWeight: "700",
+                    marginBottom: "4px",
+                    fontSize: "14px",
+                  }}
+                >
                   {location.vendorName}
                 </h3>
                 <p style={{ margin: "2px 0", fontSize: "13px", color: "#555" }}>
