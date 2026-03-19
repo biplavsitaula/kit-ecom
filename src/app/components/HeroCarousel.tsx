@@ -1,35 +1,6 @@
 import Slider from "react-slick";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { Link } from "react-router";
-
-interface ArrowProps {
-  onClick?: () => void;
-}
-
-function NextArrow({ onClick }: ArrowProps) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110"
-      aria-label="Next slide"
-    >
-      <ChevronRight className="w-6 h-6 text-[#111827]" />
-    </button>
-  );
-}
-
-function PrevArrow({ onClick }: ArrowProps) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110"
-      aria-label="Previous slide"
-    >
-      <ChevronLeft className="w-6 h-6 text-[#111827]" />
-    </button>
-  );
-}
 
 export function HeroCarousel() {
   const settings = {
@@ -41,8 +12,7 @@ export function HeroCarousel() {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    arrows: false,
     dotsClass: "slick-dots !bottom-6",
     customPaging: () => (
       <div className="w-3 h-3 bg-white/50 rounded-full hover:bg-white transition-all" />
