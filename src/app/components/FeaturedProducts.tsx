@@ -1,6 +1,5 @@
-import { Star, ShoppingCart } from 'lucide-react';
-import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
-import type { Product } from '@/app/components/shop/ProductCard';
+import { Star, ShoppingCart } from "lucide-react";
+import type { Product } from "@/app/components/shop/ProductCard";
 
 interface FeaturedProductsProps {
   onAddToCart: (product: Product) => void;
@@ -10,67 +9,73 @@ export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
   const products = [
     {
       id: 1,
-      name: 'Premium Wireless Headphones',
+      name: "Premium Wireless Headphones",
       price: 299.99,
       originalPrice: 399.99,
       rating: 4.8,
       reviews: 234,
-      image: 'https://images.unsplash.com/photo-1578517581165-61ec5ab27a19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlbGVzcyUyMGhlYWRwaG9uZXMlMjBwcm9kdWN0fGVufDF8fHx8MTc3MDAwNDcyMHww&ixlib=rb-4.1.0&q=80&w=1080',
+      image:
+        "https://images.unsplash.com/photo-1578517581165-61ec5ab27a19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlbGVzcyUyMGhlYWRwaG9uZXMlMjBwcm9kdWN0fGVufDF8fHx8MTc3MDAwNDcyMHww&ixlib=rb-4.1.0&q=80&w=1080",
       discount: 25,
-      badge: 'Best Seller',
+      badge: "Best Seller",
     },
     {
       id: 2,
-      name: 'Smart Watch Series 8',
+      name: "Smart Watch Series 8",
       price: 449.99,
       originalPrice: 599.99,
       rating: 4.9,
       reviews: 567,
-      image: 'https://images.unsplash.com/photo-1557438159-51eec7a6c9e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWFydCUyMHdhdGNoJTIwd2VhcmFibGV8ZW58MXx8fHwxNzY5OTIzODUwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+      image:
+        "https://images.unsplash.com/photo-1557438159-51eec7a6c9e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWFydCUyMHdhdGNoJTIwd2VhcmFibGV8ZW58MXx8fHwxNzY5OTIzODUwfDA&ixlib=rb-4.1.0&q=80&w=1080",
       discount: 25,
-      badge: 'Hot Deal',
+      badge: "Hot Deal",
     },
     {
       id: 3,
-      name: 'Ultra Thin Laptop Pro',
+      name: "Ultra Thin Laptop Pro",
       price: 1299.99,
       originalPrice: null,
       rating: 4.7,
       reviews: 189,
-      image: 'https://images.unsplash.com/photo-1677157561132-4f9e282a1684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjBjb21wdXRlciUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3Njk5Nzc5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      image:
+        "https://images.unsplash.com/photo-1677157561132-4f9e282a1684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjBjb21wdXRlciUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3Njk5Nzc5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       discount: null,
       badge: null,
     },
     {
       id: 4,
-      name: 'Premium Running Shoes',
+      name: "Premium Running Shoes",
       price: 129.99,
       originalPrice: 179.99,
       rating: 4.6,
       reviews: 423,
-      image: 'https://images.unsplash.com/photo-1695459468644-717c8ae17eed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxydW5uaW5nJTIwc2hvZXMlMjBzbmVha2Vyc3xlbnwxfHx8fDE3Njk5MjkwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      image:
+        "https://images.unsplash.com/photo-1695459468644-717c8ae17eed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxydW5uaW5nJTIwc2hvZXMlMjBzbmVha2Vyc3xlbnwxfHx8fDE3Njk5MjkwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       discount: 28,
-      badge: 'New Arrival',
+      badge: "New Arrival",
     },
     {
       id: 5,
-      name: 'Travel Backpack Pro',
+      name: "Travel Backpack Pro",
       price: 89.99,
       originalPrice: 119.99,
       rating: 4.5,
       reviews: 312,
-      image: 'https://images.unsplash.com/photo-1673505705687-dffbfd02b613?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWNrcGFjayUyMHRyYXZlbCUyMGJhZ3xlbnwxfHx8fDE3Njk5Nzc5Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      image:
+        "https://images.unsplash.com/photo-1673505705687-dffbfd02b613?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWNrcGFjayUyMHRyYXZlbCUyMGJhZ3xlbnwxfHx8fDE3Njk5Nzc5Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       discount: 25,
       badge: null,
     },
     {
       id: 6,
-      name: 'Wireless Earbuds',
+      name: "Wireless Earbuds",
       price: 79.99,
       originalPrice: 99.99,
       rating: 4.4,
       reviews: 678,
-      image: 'https://images.unsplash.com/photo-1578517581165-61ec5ab27a19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlbGVzcyUyMGhlYWRwaG9uZXMlMjBwcm9kdWN0fGVufDF8fHx8MTc3MDAwNDcyMHww&ixlib=rb-4.1.0&q=80&w=1080',
+      image:
+        "https://images.unsplash.com/photo-1578517581165-61ec5ab27a19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlbGVzcyUyMGhlYWRwaG9uZXMlMjBwcm9kdWN0fGVufDF8fHx8MTc3MDAwNDcyMHww&ixlib=rb-4.1.0&q=80&w=1080",
       discount: 20,
       badge: null,
     },
@@ -84,9 +89,9 @@ export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
     rating: product.rating,
     reviews: product.reviews,
     image: product.image,
-    vendor: 'Featured Store',
-    location: 'Online',
-    distance: 'N/A',
+    vendor: "Featured Store",
+    location: "Online",
+    distance: "N/A",
     discount: product.discount ?? undefined,
     inStock: true,
     badge: product.badge ?? undefined,
@@ -112,7 +117,7 @@ export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
             >
               {/* Product Image */}
               <div className="relative h-64 overflow-hidden bg-[#F9FAFB]">
-                <ImageWithFallback
+                <img
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform group-hover:scale-110"

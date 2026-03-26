@@ -1,5 +1,4 @@
 import Slider from "react-slick";
-import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { Link } from "react-router";
 
 export function HeroCarousel() {
@@ -49,7 +48,7 @@ export function HeroCarousel() {
         {slides.map((slide, index) => (
           <div key={index} className="relative">
             <div className="relative h-[500px] md:h-[600px]">
-              <ImageWithFallback
+              <img
                 src={slide.image}
                 alt={slide.title}
                 className="w-full h-full object-cover"

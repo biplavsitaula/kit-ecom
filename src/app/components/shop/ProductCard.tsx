@@ -1,5 +1,4 @@
-import { Star, ShoppingCart, MapPin, Eye } from 'lucide-react';
-import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
+import { Star, ShoppingCart, MapPin, Eye } from "lucide-react";
 
 export interface Product {
   id: number;
@@ -37,9 +36,9 @@ export function ProductCard({
   return (
     <div
       className={`bg-white rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-        isHighlighted 
-          ? 'border-[#F59E0B] shadow-xl scale-[1.02]' 
-          : 'border-[#E5E7EB] hover:border-[#22C55E] hover:shadow-lg'
+        isHighlighted
+          ? "border-[#F59E0B] shadow-xl scale-[1.02]"
+          : "border-[#E5E7EB] hover:border-[#22C55E] hover:shadow-lg"
       }`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -47,12 +46,12 @@ export function ProductCard({
       <div className="flex flex-col sm:flex-row">
         {/* Product Image */}
         <div className="relative sm:w-48 h-48 flex-shrink-0 bg-[#F9FAFB]">
-          <ImageWithFallback
+          <img
             src={product.image}
             alt={product.name}
             className="w-full h-full object-cover"
           />
-          
+
           {/* Badges */}
           {product.badge && (
             <span className="absolute top-3 left-3 bg-[#F59E0B] text-white text-xs px-3 py-1 rounded-full font-medium">
@@ -101,8 +100,8 @@ export function ProductCard({
                     key={i}
                     className={`w-4 h-4 ${
                       i < Math.floor(product.rating)
-                        ? 'fill-[#F59E0B] text-[#F59E0B]'
-                        : 'text-[#E5E7EB]'
+                        ? "fill-[#F59E0B] text-[#F59E0B]"
+                        : "text-[#E5E7EB]"
                     }`}
                   />
                 ))}
@@ -139,7 +138,9 @@ export function ProductCard({
                 className="px-4 py-2 bg-[#16A34A] hover:bg-[#22C55E] text-white rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ShoppingCart className="w-4 h-4" />
-                {cartQuantity > 0 ? `Add More (${cartQuantity})` : 'Add to Cart'}
+                {cartQuantity > 0
+                  ? `Add More (${cartQuantity})`
+                  : "Add to Cart"}
               </button>
             </div>
           </div>

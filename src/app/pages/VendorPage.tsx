@@ -91,10 +91,7 @@ export function VendorPage() {
             >
               <img
                 className="w-full group-hover:scale-110 duration-120 ease-in-out aspect-video object-cover mb-2"
-                src={
-                  vendor?.banner ||
-                  `http://placehold.co/60x60?text=${vendor.name}`
-                }
+                src={vendor?.banner}
               />
               <div className="px-6 py-2">
                 <div className="flex items-start justify-between mb-2">

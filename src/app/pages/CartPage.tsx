@@ -19,7 +19,6 @@ import {
   X,
 } from "lucide-react";
 import type { Product } from "@/app/components/shop/ProductCard";
-import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 
 type CartItem = Product & { quantity: number };
 
@@ -41,7 +40,10 @@ export function CartPage({
   const [removingId, setRemovingId] = useState<number | null>(null);
   const [summaryOpen, setSummaryOpen] = useState(false);
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
   const discount = couponApplied ? subtotal * 0.1 : 0;
   const shipping = subtotal > 150 ? 0 : subtotal > 0 ? 12.99 : 0;
   const tax = (subtotal - discount) * 0.08;
@@ -69,16 +71,19 @@ export function CartPage({
           Promo Code
         </label>
         <div
-          className={`flex items-center gap-2 rounded-xl px-3 py-2.5 border-2 transition-all duration-200 ${couponApplied
+          className={`flex items-center gap-2 rounded-xl px-3 py-2.5 border-2 transition-all duration-200 ${
+            couponApplied
               ? "border-[#16A34A] bg-[#F0FDF4]"
               : "border-[#E2E8F0] bg-white focus-within:border-[#16A34A] focus-within:shadow-[0_0_0_3px_rgba(22,163,74,0.12)]"
-            }`}
+          }`}
         >
           <Tag className="w-4 h-4 text-[#94A3B8] shrink-0" />
           <input
             type="text"
             className="flex-1 bg-transparent border-none outline-none text-sm text-[#0F172A] placeholder:text-[#94A3B8] min-w-0"
-            placeholder={couponApplied ? "SAVE10 applied ✓" : "Enter promo code"}
+            placeholder={
+              couponApplied ? "SAVE10 applied ✓" : "Enter promo code"
+            }
             value={couponApplied ? "SAVE10" : couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
             disabled={couponApplied}
@@ -93,7 +98,10 @@ export function CartPage({
           ) : (
             <button
               className="flex items-center gap-1 bg-[#DCFCE7] text-[#16A34A] text-xs font-semibold px-2.5 py-1.5 rounded-lg hover:bg-[#BBF7D0] transition-colors"
-              onClick={() => { setCouponApplied(false); setCouponCode(""); }}
+              onClick={() => {
+                setCouponApplied(false);
+                setCouponCode("");
+              }}
             >
               <RotateCcw className="w-3 h-3" />
               Remove
@@ -102,7 +110,11 @@ export function CartPage({
         </div>
         {!couponApplied && (
           <p className="text-xs text-[#94A3B8] mt-1.5 pl-1">
-            Try <code className="bg-[#F1F5F9] px-1.5 py-0.5 rounded text-[11px] font-mono text-[#475569]">SAVE10</code> for 10% off
+            Try{" "}
+            <code className="bg-[#F1F5F9] px-1.5 py-0.5 rounded text-[11px] font-mono text-[#475569]">
+              SAVE10
+            </code>{" "}
+            for 10% off
           </p>
         )}
       </div>
@@ -110,33 +122,51 @@ export function CartPage({
       {/* Summary Lines */}
       <div className="bg-[#F8FAFC] rounded-xl p-4 flex flex-col gap-3 mb-4">
         <div className="flex justify-between text-sm text-[#64748B]">
-          <span>Subtotal ({cartItems.reduce((s, i) => s + i.quantity, 0)} items)</span>
-          <span className="font-semibold text-[#0F172A]">${subtotal.toFixed(2)}</span>
+          <span>
+            Subtotal ({cartItems.reduce((s, i) => s + i.quantity, 0)} items)
+          </span>
+          <span className="font-semibold text-[#0F172A]">
+            ${subtotal.toFixed(2)}
+          </span>
         </div>
         {couponApplied && (
           <div className="flex justify-between text-sm">
             <span className="flex items-center gap-1.5 text-[#16A34A]">
               <Tag className="w-3.5 h-3.5" /> Discount (10%)
             </span>
-            <span className="font-bold text-[#16A34A]">−${discount.toFixed(2)}</span>
+            <span className="font-bold text-[#16A34A]">
+              −${discount.toFixed(2)}
+            </span>
           </div>
         )}
         <div className="flex justify-between text-sm text-[#64748B]">
           <span>Shipping</span>
-          <span className={shipping === 0 ? "font-bold text-[#16A34A]" : "font-semibold text-[#0F172A]"}>
+          <span
+            className={
+              shipping === 0
+                ? "font-bold text-[#16A34A]"
+                : "font-semibold text-[#0F172A]"
+            }
+          >
             {shipping === 0 ? "FREE 🎉" : `$${shipping.toFixed(2)}`}
           </span>
         </div>
         <div className="flex justify-between text-sm text-[#64748B]">
           <span>Estimated Tax</span>
-          <span className="font-semibold text-[#0F172A]">${tax.toFixed(2)}</span>
+          <span className="font-semibold text-[#0F172A]">
+            ${tax.toFixed(2)}
+          </span>
         </div>
         <div className="h-px bg-[#E2E8F0] my-0.5" />
         <div className="flex justify-between items-center">
           <span className="font-bold text-[#0F172A] text-base">Total</span>
           <div className="text-right">
-            <span className="font-extrabold text-[#0F172A] text-xl">${grandTotal.toFixed(2)}</span>
-            <p className="text-[10px] text-[#94A3B8] mt-0.5">USD · incl. all taxes</p>
+            <span className="font-extrabold text-[#0F172A] text-xl">
+              ${grandTotal.toFixed(2)}
+            </span>
+            <p className="text-[10px] text-[#94A3B8] mt-0.5">
+              USD · incl. all taxes
+            </p>
           </div>
         </div>
       </div>
@@ -159,13 +189,27 @@ export function CartPage({
       {/* Trust Badges */}
       <div className="mt-5 grid grid-cols-3 gap-2">
         {[
-          { icon: <ShieldCheck className="w-4 h-4 text-[#16A34A]" />, label: "SSL Secure" },
-          { icon: <Truck className="w-4 h-4 text-[#16A34A]" />, label: "Fast Delivery" },
-          { icon: <RotateCcw className="w-4 h-4 text-[#16A34A]" />, label: "Easy Returns" },
+          {
+            icon: <ShieldCheck className="w-4 h-4 text-[#16A34A]" />,
+            label: "SSL Secure",
+          },
+          {
+            icon: <Truck className="w-4 h-4 text-[#16A34A]" />,
+            label: "Fast Delivery",
+          },
+          {
+            icon: <RotateCcw className="w-4 h-4 text-[#16A34A]" />,
+            label: "Easy Returns",
+          },
         ].map(({ icon, label }) => (
-          <div key={label} className="flex flex-col items-center gap-1.5 bg-[#F8FAFC] rounded-xl py-3 px-2 text-center">
+          <div
+            key={label}
+            className="flex flex-col items-center gap-1.5 bg-[#F8FAFC] rounded-xl py-3 px-2 text-center"
+          >
             {icon}
-            <span className="text-[10px] font-semibold text-[#64748B] leading-tight">{label}</span>
+            <span className="text-[10px] font-semibold text-[#64748B] leading-tight">
+              {label}
+            </span>
           </div>
         ))}
       </div>
@@ -181,7 +225,9 @@ export function CartPage({
             <ShoppingCart className="w-[68px] h-[68px] text-[#16A34A] relative z-10" />
             <div className="absolute inset-[-10px] bg-[radial-gradient(circle,rgba(22,163,74,0.18)_0%,transparent_70%)] rounded-full animate-pulse" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">Your cart is empty</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">
+            Your cart is empty
+          </h1>
           <p className="mt-2.5 mb-6 text-[#64748B] text-sm sm:text-base leading-relaxed">
             Discover amazing products from vendors near you.
           </p>
@@ -263,7 +309,6 @@ export function CartPage({
       */}
       <main className="min-h-screen bg-[#F9FAFB] pb-[148px] lg:pb-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10">
-
           {/* ── Header ─────────────────────────────── */}
           <header className="flex items-end justify-between flex-wrap gap-3 mb-5">
             <div>
@@ -290,7 +335,10 @@ export function CartPage({
             <div className="flex items-center gap-3 bg-[#FFFBEB] border border-[#FDE68A] text-[#92400E] rounded-xl px-4 py-3 mb-5 text-sm">
               <Truck className="w-5 h-5 shrink-0" />
               <div className="flex-1 flex flex-col gap-1.5">
-                <span>Add <strong>${(150 - subtotal).toFixed(2)}</strong> more for free shipping</span>
+                <span>
+                  Add <strong>${(150 - subtotal).toFixed(2)}</strong> more for
+                  free shipping
+                </span>
                 <div className="h-1.5 bg-[#FDE68A] rounded-full overflow-hidden max-w-[200px] w-full">
                   <div
                     className="h-full bg-gradient-to-r from-[#F59E0B] to-[#16A34A] rounded-full transition-[width] duration-500"
@@ -302,13 +350,14 @@ export function CartPage({
           ) : (
             <div className="flex items-center gap-3 bg-[#F0FDF4] border border-[#86EFAC] text-[#14532D] rounded-xl px-4 py-3 mb-5 text-sm">
               <PackageCheck className="w-5 h-5 shrink-0" />
-              <span>You've unlocked <strong>free shipping!</strong> 🎉</span>
+              <span>
+                You've unlocked <strong>free shipping!</strong> 🎉
+              </span>
             </div>
           )}
 
           {/* ── Two-Column Layout ──────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px] 2xl:grid-cols-[1fr_400px] gap-5 lg:gap-6 xl:gap-7 items-start">
-
             {/* ── Items Column ───────────────────── */}
             <section className="flex flex-col gap-3 sm:gap-3.5">
               {cartItems.map((item, idx) => (
@@ -324,7 +373,7 @@ export function CartPage({
                     </div>
                   )}
                   <div className="shrink-0 self-start w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-xl overflow-hidden bg-[#F8FAFC]">
-                    <ImageWithFallback
+                    <img
                       src={item.image}
                       alt={item.name}
                       className="cart-item-img w-full h-full object-cover transition-transform duration-400"
@@ -333,18 +382,27 @@ export function CartPage({
                   <div className="flex-1 min-w-0 flex flex-col gap-2 sm:gap-3">
                     <div className="flex justify-between items-start gap-2">
                       <div className="flex-1 min-w-0">
-                        <h2 className="text-sm sm:text-base font-semibold text-[#0F172A] truncate">{item.name}</h2>
-                        <p className="text-xs text-[#94A3B8] mt-0.5">{item.vendor} · {item.location}</p>
+                        <h2 className="text-sm sm:text-base font-semibold text-[#0F172A] truncate">
+                          {item.name}
+                        </h2>
+                        <p className="text-xs text-[#94A3B8] mt-0.5">
+                          {item.vendor} · {item.location}
+                        </p>
                         {item.badge && (
                           <span className="inline-flex items-center gap-1 mt-1.5 bg-[#DCFCE7] text-[#14532D] text-[11px] font-bold px-2 py-0.5 rounded-full">
-                            <Sparkles className="w-2.5 h-2.5" />{item.badge}
+                            <Sparkles className="w-2.5 h-2.5" />
+                            {item.badge}
                           </span>
                         )}
                       </div>
                       <div className="text-right shrink-0">
-                        <p className="text-sm sm:text-base font-bold text-[#16A34A]">${item.price.toFixed(2)}</p>
+                        <p className="text-sm sm:text-base font-bold text-[#16A34A]">
+                          ${item.price.toFixed(2)}
+                        </p>
                         {item.originalPrice && (
-                          <p className="text-xs text-[#94A3B8] line-through">${item.originalPrice.toFixed(2)}</p>
+                          <p className="text-xs text-[#94A3B8] line-through">
+                            ${item.originalPrice.toFixed(2)}
+                          </p>
                         )}
                       </div>
                     </div>
@@ -352,15 +410,21 @@ export function CartPage({
                       <div className="inline-flex items-center border-[1.5px] border-[#E2E8F0] rounded-xl overflow-hidden bg-[#F8FAFC]">
                         <button
                           className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-transparent border-none cursor-pointer text-[#64748B] hover:bg-[#DCFCE7] hover:text-[#16A34A] transition-colors"
-                          onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                          onClick={() =>
+                            onUpdateQuantity(item.id, item.quantity - 1)
+                          }
                           aria-label="Decrease quantity"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="min-w-[2rem] text-center font-bold text-sm text-[#0F172A]">{item.quantity}</span>
+                        <span className="min-w-[2rem] text-center font-bold text-sm text-[#0F172A]">
+                          {item.quantity}
+                        </span>
                         <button
                           className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-transparent border-none cursor-pointer text-[#64748B] hover:bg-[#DCFCE7] hover:text-[#16A34A] transition-colors"
-                          onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                          onClick={() =>
+                            onUpdateQuantity(item.id, item.quantity + 1)
+                          }
                           aria-label="Increase quantity"
                         >
                           <Plus className="w-3.5 h-3.5" />
@@ -393,7 +457,9 @@ export function CartPage({
             {/* ── Desktop Sidebar (≥lg) ──────────── */}
             <aside className="hidden lg:block sticky top-24">
               <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 xl:p-6 2xl:p-7 shadow-[0_4px_20px_rgba(22,163,74,0.13),0_1px_4px_rgba(0,0,0,0.06)]">
-                <h3 className="text-xl xl:text-2xl font-bold text-[#0F172A] tracking-tight mb-5">Order Summary</h3>
+                <h3 className="text-xl xl:text-2xl font-bold text-[#0F172A] tracking-tight mb-5">
+                  Order Summary
+                </h3>
                 <SummaryContent />
               </div>
             </aside>
@@ -408,7 +474,6 @@ export function CartPage({
           Uses z-index: 9999 via .mobile-cart-bar
           ════════════════════════════════════════════ */}
       <div className="lg:hidden">
-
         {/* Backdrop overlay */}
         {summaryOpen && (
           <div
@@ -444,21 +509,31 @@ export function CartPage({
                   </span>
                 </div>
                 <div className="text-left">
-                  <p className="text-xs font-semibold text-[#64748B] leading-none">Order Summary</p>
-                  <p className="text-[11px] text-[#94A3B8] mt-0.5 leading-none">Tap to review & checkout</p>
+                  <p className="text-xs font-semibold text-[#64748B] leading-none">
+                    Order Summary
+                  </p>
+                  <p className="text-[11px] text-[#94A3B8] mt-0.5 leading-none">
+                    Tap to review & checkout
+                  </p>
                 </div>
               </div>
 
               {/* Right */}
               <div className="flex items-center gap-2">
                 <div className="text-right">
-                  <p className="text-base font-extrabold text-[#0F172A] leading-none">${grandTotal.toFixed(2)}</p>
+                  <p className="text-base font-extrabold text-[#0F172A] leading-none">
+                    ${grandTotal.toFixed(2)}
+                  </p>
                   {couponApplied && (
-                    <p className="text-[10px] font-semibold text-[#16A34A] mt-0.5 leading-none">10% saved!</p>
+                    <p className="text-[10px] font-semibold text-[#16A34A] mt-0.5 leading-none">
+                      10% saved!
+                    </p>
                   )}
                 </div>
                 <div className="w-8 h-8 rounded-xl bg-[#F0FDF4] border border-[#86EFAC] flex items-center justify-center">
-                  <ChevronUp className={`w-4 h-4 text-[#16A34A] transition-transform duration-200 ${summaryOpen ? "rotate-180" : ""}`} />
+                  <ChevronUp
+                    className={`w-4 h-4 text-[#16A34A] transition-transform duration-200 ${summaryOpen ? "rotate-180" : ""}`}
+                  />
                 </div>
               </div>
             </button>
@@ -485,9 +560,12 @@ export function CartPage({
             {/* Drawer Header */}
             <div className="flex items-center justify-between px-5 pb-4 pt-2 border-b border-[#F1F5F9] shrink-0">
               <div>
-                <h2 className="text-lg font-bold text-[#0F172A]">Order Summary</h2>
+                <h2 className="text-lg font-bold text-[#0F172A]">
+                  Order Summary
+                </h2>
                 <p className="text-xs text-[#94A3B8] mt-0.5">
-                  {cartItems.reduce((s, i) => s + i.quantity, 0)} items · ${subtotal.toFixed(2)} subtotal
+                  {cartItems.reduce((s, i) => s + i.quantity, 0)} items · $
+                  {subtotal.toFixed(2)} subtotal
                 </p>
               </div>
               <button
