@@ -5,13 +5,19 @@ import { ProductCard } from "@/app/components/shop/ProductCard";
 import type { Product } from "@/app/components/shop/ProductCard";
 import { Map, Grid3x3 } from "lucide-react";
 
-export function ShopPage() {
+type CartItem = Product & { quantity: number };
+
+interface ShopPageProps {
+  cartItems: CartItem[];
+  onAddToCart: (product: Product) => void;
+}
+
+export function ShopPage({ cartItems, onAddToCart }: ShopPageProps) {
   const [showMap, setShowMap] = useState(true);
   const [hoveredProductId, setHoveredProductId] = useState<number | null>(null);
   const [filterVisible, setFilterVisible] = useState(true);
   const lastScrollY = useRef(0);
   const filterBarRef = useRef<HTMLDivElement>(null);
-  const [filterHeight, setFilterHeight] = useState(0);
 
   const [filters, setFilters] = useState({
     search: "",
@@ -22,13 +28,6 @@ export function ShopPage() {
     availability: "All Items",
     sortBy: "Relevance",
   });
-
-  // Measure filter bar height for layout offset
-  useEffect(() => {
-    if (filterBarRef.current) {
-      setFilterHeight(filterBarRef.current.offsetHeight);
-    }
-  }, []);
 
   // Smart hide/show on scroll — only tracks the RIGHT product list scroll
   const productListRef = useRef<HTMLDivElement>(null);
@@ -189,6 +188,10 @@ export function ShopPage() {
     { id: 5, position: [40.6512, -73.9496] as [number, number], vendorName: "HomeDecor Brooklyn", productCount: 1, avgPrice: 89 },
   ];
 
+  const getCartQuantity = (productId: number) => {
+    return cartItems.find((item) => item.id === productId)?.quantity ?? 0;
+  };
+
   return (
     <div className="min-h-screen bg-[#F9FAFB]">
 
@@ -242,11 +245,6 @@ export function ShopPage() {
                 <div className="w-full h-full p-4 relative z-0">
                   <MapView
                     locations={locations}
-                    hoveredProductId={hoveredProductId}
-                    onMarkerClick={(id) => {
-                      const element = document.getElementById(`product-${id}`);
-                      element?.scrollIntoView({ behavior: "smooth", block: "center" });
-                    }}
                   />
                 </div>
               </div>
@@ -280,6 +278,8 @@ export function ShopPage() {
                           isHighlighted={hoveredProductId === product.id}
                           onMouseEnter={() => setHoveredProductId(product.id)}
                           onMouseLeave={() => setHoveredProductId(null)}
+                          onAddToCart={onAddToCart}
+                          cartQuantity={getCartQuantity(product.id)}
                         />
                       </div>
                     ))}

@@ -2,10 +2,22 @@ import { useState, useEffect } from "react";
 import { Search, ShoppingCart, User, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
-export function Navbar() {
+interface NavbarProps {
+  cartCount: number;
+}
+
+export function Navbar({ cartCount }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navLinks = [
+    { label: "Home", to: "/" },
+    { label: "Shop", to: "/shop" },
+    { label: "Vendor", to: "/vendor" },
+    { label: "Categories", to: "/categories" },
+    { label: "Deals", to: "/deals" },
+    { label: "About", to: "/about" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,56 +38,29 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <div className="w-8 h-8 bg-[#16A34A] rounded-lg flex items-center justify-center mr-2">
                 <ShoppingCart className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-[#111827]">ShopHub</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className={`transition-colors ${
-                location.pathname === "/"
-                  ? "text-[#16A34A] font-semibold"
-                  : "text-[#374151] hover:text-[#16A34A]"
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              className={`transition-colors ${
-                location.pathname === "/shop"
-                  ? "text-[#16A34A] font-semibold"
-                  : "text-[#374151] hover:text-[#16A34A]"
-              }`}
-            >
-              Shop
-            </Link>
-            <Link
-              to="/categories"
-              className={`transition-colors ${
-                location.pathname === "/categories"
-                  ? "text-[#16A34A] font-semibold"
-                  : "text-[#374151] hover:text-[#16A34A]"
-              }`}
-            >
-              Categories
-            </Link>
-            <Link
-              to="/deals"
-              className={`transition-colors ${
-                location.pathname === "/deals"
-                  ? "text-[#16A34A] font-semibold"
-                  : "text-[#374151] hover:text-[#16A34A]"
-              }`}
-            >
-              Deals
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`transition-colors ${
+                  location.pathname === link.to
+                    ? "text-[#16A34A] font-semibold"
+                    : "text-[#374151] hover:text-[#16A34A]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           {/* Search, Cart, Profile */}
@@ -91,12 +76,21 @@ export function Navbar() {
             </div>
 
             {/* Cart */}
-            <button className="relative p-2 text-[#374151] hover:text-[#16A34A] transition-colors">
+            <Link
+              to="/cart"
+              className={`relative p-2 transition-colors ${
+                location.pathname === "/cart"
+                  ? "text-[#16A34A]"
+                  : "text-[#374151] hover:text-[#16A34A]"
+              }`}
+            >
               <ShoppingCart className="w-6 h-6" />
-              <span className="absolute -top-1 -right-1 bg-[#F59E0B] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                3
-              </span>
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#F59E0B] text-white text-xs rounded-full min-w-5 h-5 px-1 flex items-center justify-center">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </Link>
 
             {/* Profile */}
             <button className="p-2 text-[#374151] hover:text-[#16A34A] transition-colors">
@@ -132,38 +126,19 @@ export function Navbar() {
 
             {/* Mobile Links */}
             <div className="flex flex-col space-y-3">
-              <Link
-                to="/"
-                className={`py-2 ${
-                  location.pathname === "/"
-                    ? "text-[#16A34A] font-semibold"
-                    : "text-[#374151] hover:text-[#16A34A]"
-                }`}
-              >
-                Home
-              </Link>
-              <Link
-                to="/shop"
-                className={`py-2 ${
-                  location.pathname === "/shop"
-                    ? "text-[#16A34A] font-semibold"
-                    : "text-[#374151] hover:text-[#16A34A]"
-                }`}
-              >
-                Shop
-              </Link>
-              <a
-                href="#categories"
-                className="text-[#374151] hover:text-[#16A34A] py-2"
-              >
-                Categories
-              </a>
-              <a
-                href="#deals"
-                className="text-[#374151] hover:text-[#16A34A] py-2"
-              >
-                Deals
-              </a>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`py-2 ${
+                    location.pathname === link.to
+                      ? "text-[#16A34A] font-semibold"
+                      : "text-[#374151] hover:text-[#16A34A]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         )}

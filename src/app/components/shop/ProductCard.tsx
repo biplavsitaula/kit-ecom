@@ -22,9 +22,18 @@ interface ProductCardProps {
   isHighlighted: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  onAddToCart: (product: Product) => void;
+  cartQuantity: number;
 }
 
-export function ProductCard({ product, isHighlighted, onMouseEnter, onMouseLeave }: ProductCardProps) {
+export function ProductCard({
+  product,
+  isHighlighted,
+  onMouseEnter,
+  onMouseLeave,
+  onAddToCart,
+  cartQuantity,
+}: ProductCardProps) {
   return (
     <div
       className={`bg-white rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
@@ -126,10 +135,11 @@ export function ProductCard({ product, isHighlighted, onMouseEnter, onMouseLeave
               </button>
               <button
                 disabled={!product.inStock}
+                onClick={() => onAddToCart(product)}
                 className="px-4 py-2 bg-[#16A34A] hover:bg-[#22C55E] text-white rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ShoppingCart className="w-4 h-4" />
-                Add to Cart
+                {cartQuantity > 0 ? `Add More (${cartQuantity})` : 'Add to Cart'}
               </button>
             </div>
           </div>
