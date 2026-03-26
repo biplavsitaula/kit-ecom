@@ -1,7 +1,12 @@
 import { Star, ShoppingCart } from 'lucide-react';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
+import type { Product } from '@/app/components/shop/ProductCard';
 
-export function FeaturedProducts() {
+interface FeaturedProductsProps {
+  onAddToCart: (product: Product) => void;
+}
+
+export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
   const products = [
     {
       id: 1,
@@ -70,6 +75,22 @@ export function FeaturedProducts() {
       badge: null,
     },
   ];
+
+  const toCartProduct = (product: (typeof products)[number]): Product => ({
+    id: product.id + 1000,
+    name: product.name,
+    price: product.price,
+    originalPrice: product.originalPrice ?? undefined,
+    rating: product.rating,
+    reviews: product.reviews,
+    image: product.image,
+    vendor: 'Featured Store',
+    location: 'Online',
+    distance: 'N/A',
+    discount: product.discount ?? undefined,
+    inStock: true,
+    badge: product.badge ?? undefined,
+  });
 
   return (
     <section className="py-16 bg-[#F9FAFB]">
@@ -142,7 +163,10 @@ export function FeaturedProducts() {
                 </div>
 
                 {/* Add to Cart Button */}
-                <button className="w-full bg-[#16A34A] hover:bg-[#22C55E] text-white py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={() => onAddToCart(toCartProduct(product))}
+                  className="w-full bg-[#16A34A] hover:bg-[#22C55E] text-white py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
                   <ShoppingCart className="w-4 h-4" />
                   Add to Cart
                 </button>

@@ -62,7 +62,7 @@ function App() {
     <BrowserRouter>
       <Navbar cartCount={cartCount} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage onAddToCart={handleAddToCart} />} />
         <Route
           path="/shop"
           element={<ShopPage cartItems={cartItems} onAddToCart={handleAddToCart} />}
@@ -79,7 +79,7 @@ function App() {
           }
         />
         <Route path="/categories" element={<CategoriesPage />} />
-        <Route path="/deals" element={<DealsPage />} />
+        <Route path="/deals" element={<DealsPage onAddToCart={handleAddToCart} />} />
         <Route path="/vendor" element={<VendorPage />} />
         <Route path="/about" element={<AboutPage />} />
       </Routes>

@@ -1,7 +1,12 @@
 import { FilterBar } from "@/app/components/FilterBar";
 import { DealProductCard } from "@/app/components/DealProductCard";
 import { CountdownTimer } from "@/app/components/CountdownTimer";
+import type { Product } from "@/app/components/shop/ProductCard";
 import { Zap, TrendingDown, Tag, ArrowRight } from "lucide-react";
+
+interface DealsPageProps {
+  onAddToCart: (product: Product) => void;
+}
 
 // Calculate end times for flash sales (24 hours from now, 6 hours from now, etc.)
 const get24HoursFromNow = () => new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -143,7 +148,7 @@ const dealProducts = [
   },
 ];
 
-export function DealsPage() {
+export function DealsPage({ onAddToCart }: DealsPageProps) {
   return (
     <div className="min-h-screen bg-[#F9FAFB]">
       {/* Hero Deals Banner */}
@@ -203,7 +208,7 @@ export function DealsPage() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {flashSaleProducts.map((product) => (
-              <DealProductCard key={product.id} {...product} />
+              <DealProductCard key={product.id} {...product} onAddToCart={onAddToCart} />
             ))}
           </div>
         </div>
@@ -226,7 +231,7 @@ export function DealsPage() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {dealProducts.map((product) => (
-              <DealProductCard key={product.id} {...product} />
+              <DealProductCard key={product.id} {...product} onAddToCart={onAddToCart} />
             ))}
           </div>
         </div>

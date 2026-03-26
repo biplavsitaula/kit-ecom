@@ -1,7 +1,9 @@
 import { Star, ShoppingCart } from "lucide-react";
 import { CountdownTimer } from "./CountdownTimer";
+import type { Product } from "@/app/components/shop/ProductCard";
 
 interface DealProductCardProps {
+  id: number;
   image: string;
   name: string;
   originalPrice: number;
@@ -11,9 +13,11 @@ interface DealProductCardProps {
   reviewCount: number;
   flashSale?: boolean;
   saleEndTime?: Date;
+  onAddToCart: (product: Product) => void;
 }
 
 export function DealProductCard({
+  id,
   image,
   name,
   originalPrice,
@@ -23,7 +27,24 @@ export function DealProductCard({
   reviewCount,
   flashSale = false,
   saleEndTime,
+  onAddToCart,
 }: DealProductCardProps) {
+  const cartProduct: Product = {
+    id: id + 2000,
+    name,
+    price: discountedPrice,
+    originalPrice,
+    rating,
+    reviews: reviewCount,
+    image,
+    vendor: flashSale ? "Flash Deals" : "Daily Deals",
+    location: "Online",
+    distance: "N/A",
+    discount: discountPercentage,
+    inStock: true,
+    badge: flashSale ? "Flash Sale" : "Deal",
+  };
+
   return (
     <div className="group bg-white rounded-xl border border-[#E5E7EB] overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
       {/* Image Container */}
@@ -47,7 +68,10 @@ export function DealProductCard({
         )}
 
         {/* Quick Add to Cart on Hover */}
-        <button className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#16A34A] text-white px-6 py-2.5 rounded-lg font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 flex items-center gap-2 shadow-lg hover:bg-[#15803d]">
+        <button
+          onClick={() => onAddToCart(cartProduct)}
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#16A34A] text-white px-6 py-2.5 rounded-lg font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 flex items-center gap-2 shadow-lg hover:bg-[#15803d]"
+        >
           <ShoppingCart className="w-4 h-4" />
           Quick Add
         </button>
@@ -96,7 +120,10 @@ export function DealProductCard({
         )}
 
         {/* Add to Cart Button */}
-        <button className="w-full bg-[#16A34A] text-white py-2.5 rounded-lg font-semibold hover:bg-[#15803d] transition-colors flex items-center justify-center gap-2">
+        <button
+          onClick={() => onAddToCart(cartProduct)}
+          className="w-full bg-[#16A34A] text-white py-2.5 rounded-lg font-semibold hover:bg-[#15803d] transition-colors flex items-center justify-center gap-2"
+        >
           <ShoppingCart className="w-4 h-4" />
           Add to Cart
         </button>
