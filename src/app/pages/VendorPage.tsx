@@ -1,67 +1,6 @@
+import { Link } from "react-router";
 import { Store, MapPin, ShieldCheck, Star, Box } from "lucide-react";
-
-const vendors = [
-  {
-    id: 1,
-    name: "TechStore",
-    category: "Electronics",
-    location: "New York, NY",
-    rating: 4.8,
-    products: 1240,
-    banner:
-      "https://ca-times.brightspotcdn.com/dims4/default/dbd37d6/2147483647/strip/true/crop/2016x1344+0+0/resize/1200x800!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Ff0%2F32%2Ffc26f8f74f6d9d1e6266a7f74013%2Fimg-2026.jpg",
-  },
-  {
-    id: 2,
-    name: "FashionHub",
-    category: "Fashion",
-    location: "Los Angeles, CA",
-    rating: 4.7,
-    products: 980,
-    banner:
-      "https://platform.sf.eater.com/wp-content/uploads/sites/28/chorus/uploads/chorus_asset/file/22457627/10648237_791550397560030_5178451302245274192_o.jpg?quality=90&strip=all&crop=16.796875,0,66.40625,100",
-  },
-  {
-    id: 3,
-    name: "HomeDecor",
-    category: "Home",
-    location: "Chicago, IL",
-    rating: 4.6,
-    products: 760,
-    banner:
-      "https://ca-times.brightspotcdn.com/dims4/default/dbd37d6/2147483647/strip/true/crop/2016x1344+0+0/resize/1200x800!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Ff0%2F32%2Ffc26f8f74f6d9d1e6266a7f74013%2Fimg-2026.jpg",
-  },
-  {
-    id: 4,
-    name: "AudioPro",
-    category: "Audio",
-    location: "Austin, TX",
-    rating: 4.9,
-    products: 530,
-    banner:
-      "https://platform.sf.eater.com/wp-content/uploads/sites/28/chorus/uploads/chorus_asset/file/22457627/10648237_791550397560030_5178451302245274192_o.jpg?quality=90&strip=all&crop=16.796875,0,66.40625,100",
-  },
-  {
-    id: 5,
-    name: "SportMax",
-    category: "Sports",
-    location: "Seattle, WA",
-    rating: 4.5,
-    products: 610,
-    banner:
-      "https://ca-times.brightspotcdn.com/dims4/default/dbd37d6/2147483647/strip/true/crop/2016x1344+0+0/resize/1200x800!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Ff0%2F32%2Ffc26f8f74f6d9d1e6266a7f74013%2Fimg-2026.jpg",
-  },
-  {
-    id: 6,
-    name: "BeautyNest",
-    category: "Beauty",
-    location: "Miami, FL",
-    rating: 4.7,
-    products: 450,
-    banner:
-      "https://platform.sf.eater.com/wp-content/uploads/sites/28/chorus/uploads/chorus_asset/file/22457627/10648237_791550397560030_5178451302245274192_o.jpg?quality=90&strip=all&crop=16.796875,0,66.40625,100",
-  },
-];
+import { vendors } from "@/app/data/vendors";
 
 export function VendorPage() {
   return (
@@ -122,9 +61,12 @@ export function VendorPage() {
                     <p>{vendor.products} products</p>
                   </div>
                 </div>
-                <button className="my-2 flex bg-green-500 text-white px-4 py-2 rounded-md w-full justify-center">
-                  Visit Store
-                </button>
+                <Link
+                  to={`/vendor/${vendor.id}`}
+                  className="my-2 flex bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md w-full justify-center transition-colors"
+                >
+                  View Store
+                </Link>
               </div>
             </article>
           ))}
