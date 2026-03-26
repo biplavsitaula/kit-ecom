@@ -28,6 +28,10 @@ export function Navbar({ cartCount }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   return (
     <nav
       className={`sticky top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
@@ -130,6 +134,7 @@ export function Navbar({ cartCount }: NavbarProps) {
                 <Link
                   key={link.to}
                   to={link.to}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`py-2 ${
                     location.pathname === link.to
                       ? "text-[#16A34A] font-semibold"

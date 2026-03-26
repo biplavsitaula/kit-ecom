@@ -144,12 +144,7 @@ export function AboutPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
-        .about-root {
-          font-family: 'DM Sans', sans-serif;
-        }
-        .serif { font-family: 'DM Serif Display', serif; }
+        
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(28px); }
