@@ -16,7 +16,7 @@ export function Navbar({ cartCount }: NavbarProps) {
     { label: "Vendor", to: "/vendor" },
     { label: "Categories", to: "/categories" },
     { label: "Deals", to: "/deals" },
-    { label: "About", to: "/about" },
+    { label: "Our Story", to: "/about" },
   ];
 
   useEffect(() => {
