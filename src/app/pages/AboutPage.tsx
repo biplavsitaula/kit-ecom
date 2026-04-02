@@ -494,7 +494,7 @@ export function AboutPage() {
                 ))}
               </ul>
               <a
-                href="/vendor/register"
+                href="/becomevendor"
                 className="mt-8 inline-flex items-center gap-2 bg-[#0F172A] text-white font-bold text-sm py-3.5 px-7 rounded-xl hover:-translate-y-0.5 hover:bg-[#1E293B] transition-all no-underline"
               >
                 Become a Vendor

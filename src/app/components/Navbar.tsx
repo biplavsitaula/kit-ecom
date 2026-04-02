@@ -17,6 +17,7 @@ export function Navbar({ cartCount }: NavbarProps) {
     { label: "Categories", to: "/categories" },
     { label: "Deals", to: "/deals" },
     { label: "Our Story", to: "/about" },
+    { label: "Become a Vendor", to: "/becomevendor" },
   ];
 
   useEffect(() => {
@@ -34,9 +35,8 @@ export function Navbar({ cartCount }: NavbarProps) {
 
   return (
     <nav
-      className={`sticky top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
-        isScrolled ? "shadow-md" : ""
-      }`}
+      className={`sticky top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${isScrolled ? "shadow-md" : ""
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -56,11 +56,10 @@ export function Navbar({ cartCount }: NavbarProps) {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`transition-colors ${
-                  location.pathname === link.to
-                    ? "text-[#16A34A] font-semibold"
-                    : "text-[#374151] hover:text-[#16A34A]"
-                }`}
+                className={`transition-colors ${location.pathname === link.to
+                  ? "text-[#16A34A] font-semibold"
+                  : "text-[#374151] hover:text-[#16A34A]"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -82,11 +81,10 @@ export function Navbar({ cartCount }: NavbarProps) {
             {/* Cart */}
             <Link
               to="/cart"
-              className={`relative p-2 transition-colors ${
-                location.pathname === "/cart"
-                  ? "text-[#16A34A]"
-                  : "text-[#374151] hover:text-[#16A34A]"
-              }`}
+              className={`relative p-2 transition-colors ${location.pathname === "/cart"
+                ? "text-[#16A34A]"
+                : "text-[#374151] hover:text-[#16A34A]"
+                }`}
             >
               <ShoppingCart className="w-6 h-6" />
               {cartCount > 0 && (
@@ -135,11 +133,10 @@ export function Navbar({ cartCount }: NavbarProps) {
                   key={link.to}
                   to={link.to}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`py-2 ${
-                    location.pathname === link.to
-                      ? "text-[#16A34A] font-semibold"
-                      : "text-[#374151] hover:text-[#16A34A]"
-                  }`}
+                  className={`py-2 ${location.pathname === link.to
+                    ? "text-[#16A34A] font-semibold"
+                    : "text-[#374151] hover:text-[#16A34A]"
+                    }`}
                 >
                   {link.label}
                 </Link>

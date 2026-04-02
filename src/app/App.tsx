@@ -10,6 +10,7 @@ import { CartPage } from "@/app/pages/CartPage";
 import { VendorPage } from "@/app/pages/VendorPage";
 import { VendorStorePage } from "@/app/pages/VendorStorePage";
 import { AboutPage } from "@/app/pages/AboutPage";
+import { BecomeVendorPage } from "@/app/pages/BecomeVendorPage";
 import type { Product } from "@/app/components/shop/ProductCard";
 
 type CartItem = Product & { quantity: number };
@@ -83,6 +84,7 @@ function App() {
         <Route path="/deals" element={<DealsPage onAddToCart={handleAddToCart} />} />
         <Route path="/vendor" element={<VendorPage />} />
         <Route path="/vendor/:vendorId" element={<VendorStorePage />} />
+        <Route path="/becomevendor" element={<BecomeVendorPage />} />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Footer />
