@@ -5,7 +5,7 @@ import { ShopPage } from "@/app/pages/ShopPage";
 import { CategoriesPage } from "@/app/pages/CategoriesPage";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
-import { DealsPage } from "@/app/pages/DealsPage";
+// import { DealsPage } from "@/app/pages/DealsPage";
 import { CartPage } from "@/app/pages/CartPage";
 import { VendorPage } from "@/app/pages/VendorPage";
 import { VendorStorePage } from "@/app/pages/VendorStorePage";
@@ -81,7 +81,7 @@ function App() {
           }
         />
         <Route path="/categories" element={<CategoriesPage />} />
-        <Route path="/deals" element={<DealsPage onAddToCart={handleAddToCart} />} />
+        {/* <Route path="/deals" element={<DealsPage onAddToCart={handleAddToCart} />} /> */}
         <Route path="/vendor" element={<VendorPage />} />
         <Route path="/vendor/:vendorId" element={<VendorStorePage />} />
         <Route path="/becomevendor" element={<BecomeVendorPage />} />

@@ -15,9 +15,7 @@ export function Navbar({ cartCount }: NavbarProps) {
     { label: "Shop", to: "/shop" },
     { label: "Vendor", to: "/vendor" },
     { label: "Categories", to: "/categories" },
-    { label: "Deals", to: "/deals" },
     { label: "Our Story", to: "/about" },
-    { label: "Become a Vendor", to: "/becomevendor" },
   ];
 
   useEffect(() => {
@@ -64,6 +62,15 @@ export function Navbar({ cartCount }: NavbarProps) {
                 {link.label}
               </Link>
             ))}
+            <Link
+              to="/becomevendor"
+              className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${location.pathname === "/becomevendor"
+                ? "bg-[#15803D] text-white ring-2 ring-offset-2 ring-[#16A34A]"
+                : "bg-[#16A34A] text-white hover:bg-[#15803D] hover:shadow-md"
+                }`}
+            >
+              Become a Vendor
+            </Link>
           </div>
 
           {/* Search, Cart, Profile */}
@@ -128,6 +135,16 @@ export function Navbar({ cartCount }: NavbarProps) {
 
             {/* Mobile Links */}
             <div className="flex flex-col space-y-3">
+              <Link
+                to="/becomevendor"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`inline-flex justify-center py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 ${location.pathname === "/becomevendor"
+                  ? "bg-[#15803D] text-white"
+                  : "bg-[#16A34A] text-white hover:bg-[#15803D]"
+                  }`}
+              >
+                Become a Vendor
+              </Link>
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
