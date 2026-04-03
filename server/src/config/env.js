@@ -1,0 +1,7 @@
+export const env = {
+  DB: process.env.MONGO_URI,
+  ACCESS_TOKEN_TIME: process.env.ACCESS_EXPIRE,
+  REFRESH_TOKEN_TIME: process.env.REFRESH_EXPIRE,
+  ACCESS_TOKEN: process.env.JWT_ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN: process.env.JWT_REFRESH_TOKEN_SECRET
+};
